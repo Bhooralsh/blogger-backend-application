@@ -4,7 +4,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import com.blog.entities.User;
 import com.blog.payload.UserDto;
@@ -86,7 +89,7 @@ public class UserServiceImpl implements UserService {
 	public UserDto userToDto(User user) {
 		UserDto userDto = new UserDto();
 		userDto.setId(user.getId());
-		userDto.setName(userDto.getName());
+		userDto.setName(user.getName());
 		userDto.setEmail(user.getEmail());
 
 		userDto.setPassword(user.getPassword());
@@ -94,4 +97,5 @@ public class UserServiceImpl implements UserService {
 
 		return userDto;
 	}
+
 }
