@@ -28,14 +28,5 @@
 			<attribute name="maven.pomderived" value="true"/>
 		</attributes>
 	</classpathentry>
-	<classpathentry kind="lib" path="C:/Users/Bhooral.khan/.m2/repository/org/springframework/spring-beans/5.3.19/spring-beans-5.3.19.jar" sourcepath="C:/Users/Bhooral.khan/.m2/repository/org/springframework/spring-beans/5.3.19/spring-beans-5.3.19-sources.jar">
-		<attributes>
-			<attribute name="maven.pomderived" value="true"/>
-			<attribute name="maven.groupId" value="org.springframework"/>
-			<attribute name="maven.artifactId" value="spring-beans"/>
-			<attribute name="maven.version" value="5.3.19"/>
-			<attribute name="maven.scope" value="compile"/>
-		</attributes>
-	</classpathentry>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
