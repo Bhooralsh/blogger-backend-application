@@ -27,9 +27,17 @@ public class CategoryServiceImpl implements CategoryService {
 	@Override
 	public CategoryDto createCategory(CategoryDto categoryDto) {
 		// TODO Auto-generated method stub
-		Category catgory = this.dtoToCategory(categoryDto);
-		Category savedCategory = this.categoryRepository.save(catgory);
-		return this.categoryToDto(savedCategory);
+
+		Category cat = this.modelMapper.map(categoryDto, Category.class);
+
+		Category addCat = this.categoryRepository.save(cat);
+
+		return this.modelMapper.map(addCat, CategoryDto.class);
+		/*
+		 * Category catgory = this.dtoToCategory(categoryDto); Category savedCategory =
+		 * this.categoryRepository.save(catgory); return
+		 * this.categoryToDto(savedCategory);
+		 */
 	}
 
 	@Override
@@ -37,21 +45,23 @@ public class CategoryServiceImpl implements CategoryService {
 
 		Category category = this.categoryRepository.findById(categoryId)
 				.orElseThrow(() -> new ResourceNotFoundException("category", "id", categoryId));
-		category.setTitle(categoryDto.getTitle());
-		category.setDescription(categoryDto.getDescription());
+		category.setCategoryDescription(categoryDto.getCategoryTitle());
+		category.setCategoryDescription(categoryDto.getCategoryDescription());
 
 		Category updateCategory = this.categoryRepository.save(category);
-		CategoryDto categoryDto1 = this.categoryToDto(updateCategory);
-		return categoryDto1;
+
+		return this.modelMapper.map(updateCategory, CategoryDto.class);
+		// CategoryDto categoryDto1 = this.categoryToDto(updateCategory);
+		// return categoryDto1;
 	}
 
 	@Override
 	public CategoryDto getCategoryById(Integer categoryId) {
 
 		Category category = this.categoryRepository.findById(categoryId)
-				.orElseThrow(() -> new ResourceNotFoundException("Category", "id", categoryId));
+				.orElseThrow(() -> new ResourceNotFoundException("Category", "category id", categoryId));
 
-		return this.categoryToDto(category);
+		return this.modelMapper.map(category, CategoryDto.class);
 
 	}
 
@@ -60,17 +70,20 @@ public class CategoryServiceImpl implements CategoryService {
 		// TODO Auto-generated method stub
 		List<Category> categories = categoryRepository.findAll();
 
-		List<CategoryDto> categoryDtos = categories.stream().map(category -> this.categoryToDto(category))
-				.collect(Collectors.toList());
-		return categoryDtos;
+		List<CategoryDto>catDto=categories.stream().map((cat) -> this.modelMapper.map(cat,CategoryDto.class)).collect(Collectors.toList());
+		/*
+		 * List<CategoryDto> categoryDtos = categories.stream().map(category ->
+		 * this.categoryToDto(category)) .collect(Collectors.toList());
+		 */
+		return catDto;
 	}
 
 	@Override
 	public void deletCategory(Integer categoryId) {
-		
+
 		Category category = this.categoryRepository.findById(categoryId)
-				.orElseThrow(() -> new ResourceNotFoundException("Category","id",categoryId));
-			
+				.orElseThrow(() -> new ResourceNotFoundException("Category", " category id", categoryId));
+
 		this.categoryRepository.delete(category);
 		// TODO Auto-generated method stub
 
