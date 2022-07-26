@@ -11,15 +11,17 @@ public interface PostService {
 	public PostDto createPost(PostDto postDto,Integer userId,Integer categoryId);
 	
 	//update post
-	public Post updatePost(PostDto postDto,Integer postId);
+	public PostDto updatePost(PostDto postDto,Integer postId);
 	
 	//
-	public Post getPostById(Integer postId);
+	public PostDto getPostById(Integer postId);
+	
+	
 	//get all post
-	public List<Post>getAllPost();
+	public List<PostDto>getAllPost();
 
 	//delete 
-	public void deleteCategory(Integer postId);
+	public void deletePost(Integer postId);
 	
 	
 	//get All post by category
